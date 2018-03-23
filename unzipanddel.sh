@@ -1,4 +1,4 @@
-DIREC="~/data/20171226-patentsview"
+DIREC=$1
 PWD=`pwd`
 cd $DIREC
 for file in `ls $DIREC/*.zip`
