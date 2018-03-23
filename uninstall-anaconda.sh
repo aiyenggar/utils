@@ -4,7 +4,7 @@
 PWD=`pwd`
 cd ~
 rm -rf anaconda
-rm -rf anaconda_backup
+rm -rf .anaconda_backup
 rm -rf .spyder*
 
 cd /Applications
