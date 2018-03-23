@@ -17,9 +17,9 @@ url = sys.argv[1]
 
 f = urllib.request.urlopen(url)
 soup = BeautifulSoup(f.read(), "lxml")
-for i in soup.find_all('a', attrs={'href': re.compile('(?i)(zip|xlsx)$')}):
+for i in soup.find_all('a', attrs={'href': re.compile('(?i)(pdf)$')}):
     fileurl=i.get('href')
     filename="/Users/aiyenggar/OneDrive/data/archive/20170307-patentsview/" + fileurl.split('/')[-1]
     print(fileurl + " -> " + filename)
-    get_large_file(fileurl, filename)
+#    get_large_file(fileurl, filename)
 #    urllib.request.urlretrieve(i.get('href'), file=)

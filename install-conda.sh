@@ -1,0 +1,2 @@
+conda update --all
+
