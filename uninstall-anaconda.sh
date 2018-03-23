@@ -11,3 +11,4 @@ cd /Applications
 rm -rf anaconda
 rm -rf Anaconda-Navigator.app
 
+cd $PWD
