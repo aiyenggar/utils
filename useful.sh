@@ -70,3 +70,8 @@ finally you can git crypt unlock
 
 At this stage you can seamlessly lock and unlock without further steps. But if I need to rsync to an external drive in a way that the content is encrypted, then what should I do? Should I delete the .git-crypt folder? Also, what happens if I lose the default key file. What is it, really?
 
+# git commands
+ git reset --hard HEAD^ If you are removing multiple commits from the top, you can run git reset --hard HEAD~2 to remove the last two commits
+https://sethrobertson.github.io/GitFixUm/fixup.html
+A wonderful site with many useful commands.
+
