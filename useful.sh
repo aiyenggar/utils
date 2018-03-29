@@ -26,6 +26,28 @@ pbcopy < ~/.ssh/id_rsa.pub
 paste this on github.com settings
 ssh -T git@github.com
 
+Installing git-crypt on Mac
+To get git-crypt, you needed to update xcode from App Store.
+Then download gnupg for os x. The version I have is 2.2.5. 
+Then you need to brew install git-crypt
+brew install gpg
+brew link --overwrite gnupg
+
+Process to move keys from one machine to another
+gpg --export -a ashwin.iyenggar@gmail.com > public.key
+gpg --export-secret-key -a ashwin.iyenggar@gmail.com > private.key
+
+gpg --import public.key
+gpg --import private.key
+
+You'll notice that the trust level is unknown when you perform a gpg --list-keys
+
+To fix this:
+gpg --edit-key ashwin.iyenggar
+> trust
+Your Decision? 5
+> save
+
 Ashwin’s Summary:
 mkdir folder, add files
 git init
@@ -59,8 +81,6 @@ git remote set-url origin git@github.com:aiyenggar/econometrics.git
 git crypt status
 git crypt lock
 git crypt unlock
-
-# To get git-crypt, you needed to update xcode from App Store, then download gnupg for os x. The version I have is 2.2.5 
 
 The locking unlocking process on git crypt
 locking is easy. git crypt lock.
