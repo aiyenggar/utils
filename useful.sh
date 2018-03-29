@@ -33,6 +33,9 @@ Then you need to brew install git-crypt
 brew install gpg
 brew link --overwrite gnupg
 
+gpg --delete-secret-key ashwin.iyenggar@gmail.com
+gpg --delete-key ashwin.iyenggar@gmail.com
+
 Process to move keys from one machine to another
 gpg --export -a ashwin.iyenggar@gmail.com > public.key
 gpg --export-secret-key -a ashwin.iyenggar@gmail.com > private.key
@@ -44,7 +47,7 @@ You'll notice that the trust level is unknown when you perform a gpg --list-keys
 
 
 To fix this:
-gpg --edit-key ashwin.iyenggar
+gpg --edit-key ashwin.iyenggar@gmail.com
 > trust
 Your Decision? 5
 > save
