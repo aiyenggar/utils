@@ -221,3 +221,34 @@ dupes = df[df.duplicated(['col1', 'col2', 'col3'], keep=False)]
 pd.set_option('display.float_format', lambda x: '%.3f' % x)
 # To display with commas and no decimals
 pd.options.display.float_format = '{:,.0f}'.format
+
+
+# having grouped by department in by_dept, how to get the five most popular departments
+by_dept.title.nunique().sort_values(ascending=False)[:5]
+
+#TODO learn to master the apply function
+
+np.arange (not arrange, I initially mistook)  returns an list of evenly spaced elements. Can be used in ranking.
+Apparently adding 1 to a list adds 1 to each of the elements. Incredible.
+
+# clearly the groupby function is powerful. I think I need to learn better how to use the apply, and aggregate functions. Keep thinking and looking at good Python code, and life will get better
+
+# data.loc[] takes a second parameter that allows you to specify which columns you with to select. Like data.loc[(data["Gender"]=="Female") & (data["Education"]=="Not Graduate") & (data["Loan_Status"]=="Y"), ["Gender","Education","Loan_Status"]]
+
+You can impute values (especially when they are missing) this way: data['Gender'].fillna(mode(data['Gender']).mode[0], inplace=True). fillna basically replaces something when it is null. How do you change only those values that match a particular value, the more generalized version of fillna?
+For this there seems to be a replace function. data['item']=data['item'].replace('sms', 'text') 
+
+This one is fantastic. First it tells you how to change a specfic cell. Second it tells you how you can change it to a value that is calculated based on the rest of the data - a sort of imputation to median, mode etc.
+impute_grps = data.pivot_table(values=["LoanAmount"], index=["Gender","Married","Self_Employed"], aggfunc=np.mean)
+for i,row in data.loc[data['LoanAmount'].isnull(),:].iterrows():
+  ind = tuple([row['Gender'],row['Married'],row['Self_Employed']])
+  data.loc[i,'LoanAmount'] = impute_grps.loc[ind].values[0]
+
+axis = 0 means you go column by column and axis = 1 means you go row by row. of course axis = 0 means row and axis = 1 means column.
+
+Binning is an interesting idea where you take a continuous value and put it into discrete bins. basically pd.cut(column, bin=a list of boundary values, labels= a list of associated category names). labels will be one less than boundary values.
+
+df.query('a < b and b < c')
+df.query('a < b < c')
+
+http://pandas.pydata.org/pandas-docs/stable/indexing.html has a lot of examples using many different variations. Nice to practice, but a little long.

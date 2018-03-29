@@ -60,7 +60,7 @@ git crypt status
 git crypt lock
 git crypt unlock
 
-# To get git-crypt, you needed to update xcode from App Store, then download gnutools or something like that. 
+# To get git-crypt, you needed to update xcode from App Store, then download gnupg for os x. The version I have is 2.2.5 
 
 The locking unlocking process on git crypt
 locking is easy. git crypt lock.
