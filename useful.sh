@@ -1,4 +1,13 @@
+# sed or stream editor can be used to print lines - either specific lines, or every other line, or every two lines. Or to match patterns (start, end or both) and print lines in between. You can print a certain range of lines, or the lines in the neighbourhood of a certain line (whose matching condition has been met). !p inverts the matching/printing process. $ is the last line. ^ is the start of a line.
+
 # Print the kth line of a file using sed
+sed -n '3'p filename
+sed -n '3~2'p filename (from the third print every other line)
+sed -n '4,8'p filename (print from the 4th to the 8th line)
+sed -n '/Hardware/,6p' (matches the term Hardware and prints from that to 6th line)
+sed -n '3,/Security/p' (the other way)
+sed -n '/Storage/,+2p' (two lines from match)
+sed -n '/Storage/,/Design/g' (all lines from the matched line to Storage to the matched line to Design)
 
 # Get the first k lines of a file, in place using sed -i
 
@@ -8,7 +17,7 @@ awk -F\" 'NF % 2 == 0'
 # To drop a certain field (2nd here) in a text file
 awk -F"\t" '{ $2=""; print}'
 
-# Print the entire line of a tab separated file if the 4th field mathes “IN”
+# Print the entire line of a tab separated file if the 4th field matches “IN”
 awk -F"\t" '$4=="IN" {print $0}'  location.tsv > india.location.tsv
 
 
@@ -16,6 +25,8 @@ awk -F"\t" '$4=="IN" {print $0}'  location.tsv > india.location.tsv
 `awk': awk -F"\t" 'tolower($8) ~ /indian space/ {print $2","$8} ‘ rawassignee.tsv
 
 rsync -r ~/personal /Volumes/2013a\ Data/OneDrive --delete
+
+# grep printing context -B for before -A for after -C if you want same number of lines before and after
 
 
 SSH Key Generation

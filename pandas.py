@@ -37,7 +37,7 @@ plt.xlabel('year of release')
 plt.ylabel('median rating');
 
 devices.rename(columns={"Retail Branding": "manufacturer"}, inplace=True)
-result = pd.merge(result, 
+result = pd.merge(result,
                   devices[['manufacturer', 'Model']],
                   left_on='device',
                   right_on='Model',
@@ -236,7 +236,7 @@ Apparently adding 1 to a list adds 1 to each of the elements. Incredible.
 # data.loc[] takes a second parameter that allows you to specify which columns you with to select. Like data.loc[(data["Gender"]=="Female") & (data["Education"]=="Not Graduate") & (data["Loan_Status"]=="Y"), ["Gender","Education","Loan_Status"]]
 
 You can impute values (especially when they are missing) this way: data['Gender'].fillna(mode(data['Gender']).mode[0], inplace=True). fillna basically replaces something when it is null. How do you change only those values that match a particular value, the more generalized version of fillna?
-For this there seems to be a replace function. data['item']=data['item'].replace('sms', 'text') 
+For this there seems to be a replace function. data['item']=data['item'].replace('sms', 'text')
 
 This one is fantastic. First it tells you how to change a specfic cell. Second it tells you how you can change it to a value that is calculated based on the rest of the data - a sort of imputation to median, mode etc.
 impute_grps = data.pivot_table(values=["LoanAmount"], index=["Gender","Married","Self_Employed"], aggfunc=np.mean)
@@ -252,3 +252,17 @@ df.query('a < b and b < c')
 df.query('a < b < c')
 
 http://pandas.pydata.org/pandas-docs/stable/indexing.html has a lot of examples using many different variations. Nice to practice, but a little long.
+
+"""
+    Turning out to miss the location_id
+    citn = citn.set_index('p_location_id').join(pat_location.set_index('p_id'))
+    citn = citn.set_index('c_location_id').join(cit_location.set_index('c_id'))
+"""
+    # Get locationid for the rawlocation_id for the inventors above. Find out how to select pandas rows that match of many values
+
+"""
+The following works for a one to one mapping. You can avoid a join. But in case you want to pull multiple fields then a join may become mandatory.
+
+manip['p_location_id'] = manip.p_rawlocation_id.replace(citn_rawlocation.set_index('id')['location_id'])
+manip['c_location_id'] = manip.c_rawlocation_id.replace(citn_rawlocation.set_index('id')['location_id'])
+"""
