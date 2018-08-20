@@ -20,6 +20,11 @@ awk -F"\t" '{ $2=""; print}'
 # Print the entire line of a tab separated file if the 4th field matches “IN”
 awk -F"\t" '$4=="IN" {print $0}'  location.tsv > india.location.tsv
 
+# Sum a column
+awk -F"," '{sum+=$6} END{print sum}'
+
+# Alternatively
+awk -F"," '{sum+=$6} END{printf "%.f\n",sum}'
 
 # Pattern search anywhere in string
 `awk': awk -F"\t" 'tolower($8) ~ /indian space/ {print $2","$8} ‘ rawassignee.tsv
