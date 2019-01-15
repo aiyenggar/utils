@@ -20,6 +20,9 @@ awk -F"\t" '{ $2=""; print}'
 # Print the entire line of a tab separated file if the 4th field matches “IN”
 awk -F"\t" '$4=="IN" {print $0}'  location.tsv > india.location.tsv
 
+# Using an or (||) and (&&) not {!} condition
+awk -F"\t" '$1=="8288508" || $1=="8331281" {print $0}' patent.tsv
+
 # Sum a column
 awk -F"," '{sum+=$6} END{print sum}'
 
