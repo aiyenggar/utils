@@ -266,3 +266,14 @@ The following works for a one to one mapping. You can avoid a join. But in case 
 manip['p_location_id'] = manip.p_rawlocation_id.replace(citn_rawlocation.set_index('id')['location_id'])
 manip['c_location_id'] = manip.c_rawlocation_id.replace(citn_rawlocation.set_index('id')['location_id'])
 """
+
+"""
+Some amazing discoveries by aiyenggar
+"""
+
+conditions10 = [ df_inventor['ua1'] >= 0, df_inventor['ua2'] >= 0, df_inventor['ua3'] >= 0 ]
+choices10 = [ df_inventor['ua1'], df_inventor['ua2'], df_inventor['ua3'] ]
+df_inventor['ua'] = np.select(conditions10, choices10, default=-1)
+df_inventor['ualist'] = df_inventor['ua'].apply(lambda x: [x])
+df_inventor = df_inventor[['patent_id', 'ualist']]
+df_inventor = df_inventor.groupby('patent_id').agg({'ualist':'sum'})
