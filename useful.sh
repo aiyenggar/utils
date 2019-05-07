@@ -118,3 +118,12 @@ At this stage you can seamlessly lock and unlock without further steps. But if I
 https://sethrobertson.github.io/GitFixUm/fixup.html
 A wonderful site with many useful commands.
 
+
+# character set of files
+file -I *.tex
+clusterskf.tex:        text/x-tex; charset=us-ascii
+metadissertation.tex:  text/x-tex; charset=iso-8859-1
+philosophy.tex:        text/x-tex; charset=us-ascii
+proposal.tex:          text/x-tex; charset=utf-8
+
+iconv -f iso-8859-1 -t utf-8 < metadissertation.tex > m.tex
