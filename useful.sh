@@ -36,6 +36,10 @@ rsync -r ~/personal /Volumes/2013a\ Data/OneDrive --delete
 
 # grep printing context -B for before -A for after -C if you want same number of lines before and after
 
+# Printing the first line as well as matched lines
+grep -E 'patent_id|3959017' input.csv 
+sed '1p;/pattern/!d' input.csv
+awk 'NR==1 || /pattern/' input.csv
 
 SSH Key Generation
 ssh-keygen -t rsa -b 4096 -C "ashwin.iyenggar@gmail.com"
