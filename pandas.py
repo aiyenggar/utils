@@ -277,3 +277,7 @@ df_inventor['ua'] = np.select(conditions10, choices10, default=-1)
 df_inventor['ualist'] = df_inventor['ua'].apply(lambda x: [x])
 df_inventor = df_inventor[['patent_id', 'ualist']]
 df_inventor = df_inventor.groupby('patent_id').agg({'ualist':'sum'})
+
+To read a large file in parts and put it into a pandas dataframe
+iter_csv = pd.read_csv('file.csv', iterator=True, chunksize=10000000)
+df = pd.concat([chunk[chunk['field'] > cutoff] for chunk in iter_csv)
