@@ -281,3 +281,7 @@ df_inventor = df_inventor.groupby('patent_id').agg({'ualist':'sum'})
 To read a large file in parts and put it into a pandas dataframe
 iter_csv = pd.read_csv('file.csv', iterator=True, chunksize=10000000)
 df = pd.concat([chunk[chunk['field'] > cutoff] for chunk in iter_csv)
+
+To find the unique values of an index (even if a multiindex)
+df.index for the overall index (including single and multiindex)
+df.index.levels[index_subscript] for a specific index in a multiindex
