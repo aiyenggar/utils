@@ -285,3 +285,7 @@ df = pd.concat([chunk[chunk['field'] > cutoff] for chunk in iter_csv)
 To find the unique values of an index (even if a multiindex)
 df.index for the overall index (including single and multiindex)
 df.index.levels[index_subscript] for a specific index in a multiindex
+
+to access based on index use .loc, for a wild card leave blank but place appropriate number of commas (1 less than number of index fields in the multiindex)
+df.loc[(3045, '3930274', ), ['q4','year']]
+

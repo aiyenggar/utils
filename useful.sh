@@ -32,6 +32,9 @@ awk -F"," '{sum+=$6} END{printf "%.f\n",sum}'
 # Pattern search anywhere in string
 `awk': awk -F"\t" 'tolower($8) ~ /indian space/ {print $2","$8} ‘ rawassignee.tsv
 
+# Print first line and matched lines
+awk -F"," 'NR==1 {print $0}; $1==225 {print $0}' latlong_urbanarea_1.csv 
+
 rsync -r ~/personal /Volumes/2013a\ Data/OneDrive --delete
 
 # grep printing context -B for before -A for after -C if you want same number of lines before and after
