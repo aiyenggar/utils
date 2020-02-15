@@ -45,7 +45,7 @@ sed '1p;/pattern/!d' input.csv
 awk 'NR==1 || /pattern/' input.csv
 
 SSH Key Generation
-ssh-keygen -t rsa -b 4096 -C "ashwin.iyenggar@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "aiyenggar@icloud.com"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 pbcopy < ~/.ssh/id_rsa.pub
@@ -62,12 +62,12 @@ brew link --overwrite gnupg
 
 Process to move keys from one machine to another
 On source machine
-gpg --export -a ashwin.iyenggar@gmail.com > public.key
-gpg --export-secret-key -a ashwin.iyenggar@gmail.com > private.key
+gpg --export -a aiyenggar@icloud.com > public.key
+gpg --export-secret-key -a aiyenggar@icloud.com > private.key
 
 On destination machine
-gpg --delete-secret-key ashwin.iyenggar@gmail.com
-gpg --delete-key ashwin.iyenggar@gmail.com
+gpg --delete-secret-key aiyenggar@icloud.com
+gpg --delete-key aiyenggar@icloud.com
 gpg --import public.key
 gpg --import private.key
 
