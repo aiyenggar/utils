@@ -52,6 +52,13 @@ pbcopy < ~/.ssh/id_rsa.pub
 paste this on github.com settings
 ssh -T git@github.com
 
+Add to .zshrc
+export LC_ALL=en_US.UTF-8
+export PATH=/Applications/anaconda3/bin:$PATH
+
+Install homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+
 Installing git-crypt on Mac
 To get git-crypt, you needed to update xcode from App Store.
 Then download gnupg for os x. The version I have is 2.2.5. 
