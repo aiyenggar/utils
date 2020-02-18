@@ -111,8 +111,8 @@ git clone git@github.com:aiyenggar/utils.git
 Troubleshooting
 Incase the repository was cloned from the desktop app prior to the ssh setting
 
- git config --global user.name “Ashwin"
- git config --global user.email "aiyenggar@users.noreply.github.com"
+git config --global user.name "Ashwin"
+git config --global user.email "aiyenggar@users.noreply.github.com"
 git remote set-url origin git@github.com:aiyenggar/econometrics.git
 
 git crypt status
