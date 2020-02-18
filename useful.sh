@@ -62,7 +62,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 Installing git-crypt on Mac
 To get git-crypt, you needed to update xcode from App Store.
 Then download gnupg for os x. The version I have is 2.2.5. 
-Then you need to brew install git-crypt
+brew install git-crypt
 brew install gpg
 brew link --overwrite gnupg
 
@@ -80,7 +80,7 @@ gpg --import private.key
 
 You'll notice that the trust level is unknown when you perform a gpg --list-keys
 To fix this:
-gpg --edit-key ashwin.iyenggar@gmail.com
+gpg --edit-key aiyenggar@icloud.com
 > trust
 Your Decision? 5
 > save
@@ -122,7 +122,7 @@ git crypt unlock
 The locking unlocking process on git crypt
 locking is easy. git crypt lock.
 To unlock, you first need to place the default key file into .git/git-crypt/keys/
-then git crypt add-gpg-user ashwin.iyenggar@gmail.com
+then git crypt add-gpg-user aiyenggar@icloud.com
 finally you can git crypt unlock
 
 At this stage you can seamlessly lock and unlock without further steps. But if I need to rsync to an external drive in a way that the content is encrypted, then what should I do? Should I delete the .git-crypt folder? Also, what happens if I lose the default key file. What is it, really?
