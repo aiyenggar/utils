@@ -289,3 +289,10 @@ df.index.levels[index_subscript] for a specific index in a multiindex
 to access based on index use .loc, for a wild card leave blank but place appropriate number of commas (1 less than number of index fields in the multiindex)
 df.loc[(3045, '3930274', ), ['q4','year']]
 
+
+df1['matched'].value_counts() to get histogram counts
+df1.hist() for histogram chart, but only works on numeric fields
+df1._merge.unique() unique values in the column
+df1.describe()
+df1.info()
+dict([(v, df3[v].apply(lambda r: len(str(r)) if r!=None else 0).max())for v in df3.columns.values]) gets the max length of each column
