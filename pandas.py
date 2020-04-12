@@ -296,3 +296,89 @@ df1._merge.unique() unique values in the column
 df1.describe()
 df1.info()
 dict([(v, df3[v].apply(lambda r: len(str(r)) if r!=None else 0).max())for v in df3.columns.values]) gets the max length of each column
+
+-----------------------------------
+--------  Learning Groupby --------
+-----------------------------------
+
+data.sample(n=5)
+data.sort_values(by='arr_delay', ascending=False)[:10]
+def is_delayed(x):
+    return x > 0
+data['delayed'] = data['arr_delay'].apply(is_delayed)
+data['delayed'] = data['arr_delay'].apply(lambda x: x > 0)
+data['delayed'].value_counts()
+not_delayed = data['delayed'].value_counts()[0] # first value of the result above
+delayed = data['delayed'].value_counts()[1] # second value of the result above
+total_flights = not_delayed + delayed # total count of flights
+print float(delayed) / total_flights # converting to float to get a float result
+
+not_delayed, delayed = data['cancelled'].value_counts()
+print delayed / (delayed + not_delayed), '<- without conversion'
+print float(delayed) / (delayed + not_delayed), '<- _with_ conversion!'
+group_by_carrier = data.groupby(['unique_carrier','delayed'])
+group_by_carrier.size() # Count by the grouping
+count_delays_by_carrier = group_by_carrier.size().unstack()
+count_delays_by_carrier.plot(kind='barh', stacked=True, figsize=[16,6], colormap='winter')
+
+You can customize plots a number of ways. Here's a quick guide to common parameters:
+
+kind=: 'line', 'bar', 'barh', 'hist', 'box', 'area', 'scatter'
+figsize=: (width, height) in inches
+colormap=: a long list of color palettes, including: 'autumn', 'winter', 'summer'
+title=: a string
+stacked=: stack the values vertically (instead of allowing them to overlap)
+
+Pivot Table
+flights_by_carrier = data.pivot_table(index='flight_date', columns='unique_carrier', values='flight_num', aggfunc='count')
+flights_by_carrier.head()
+data.pivot_table(columns='flight_date') # gives aggregate stats on all fields
+delays_list = ['carrier_delay','weather_delay','late_aircraft_delay','nas_delay','security_delay']
+flight_delays_by_day = data.pivot_table(index='flight_date', values=delays_list, aggfunc='sum')
+flight_delays_by_day.plot(kind='area', figsize=[16,6], stacked=True, colormap='autumn') # area plot
+pd.Series([1, 2, 5, 9, 12, 20]).plot(kind='hist', bins=[0,10,20]) # `bins` defines the start and end points of bins Histogram
+bin_values = np.arange(start=-50, stop=200, step=10)
+
+bin_values = np.arange(start=-50, stop=200, step=10)
+us_mq_airlines_index = data['unique_carrier'].isin(['US','MQ']) # create index of flights from those airlines
+us_mq_airlines = data[us_mq_airlines_index] # select rows
+group_carriers = us_mq_airlines.groupby('unique_carrier')['arr_delay'] # group values by carrier, select minutes delayed
+group_carriers.plot(kind='hist', bins=bin_values, figsize=[12,6], alpha=.4, legend=True) # alpha for transparency
+    
+hi_volume_airports_pivots = hi_volume_airports.pivot_table(index='flight_date', columns='origin', values='arr_delay')
+hi_volume_airports_pivots.plot(kind='box', figsize=[16,8])
+
+bins = pd.cut(df["temp_c"], bins=3, labels=("cool", "warm", "hot"))
+
+df.resample("Q")["co"].agg(["max", "min"]) # resample is an alternative to groupby where you pass a frequency string "Q" in the above case, usually time	
+
+f.groupby("outlet", sort=False)["title"].apply(lambda ser: ser.str.contains("Fed").sum()).nlargest(10)
+
+
+# Create storage object with filename `processed_data`
+data_store = pd.HDFStore('processed_data.h5')
+
+# Put DataFrame into the object setting the key as 'preprocessed_df'
+data_store['preprocessed_df'] = df
+data_store.close()
+
+# Access data store
+data_store = pd.HDFStore('processed_data.h5')
+
+# Retrieve data using key
+preprocessed_df = data_store['preprocessed_df']
+data_store.close()
+
+------------------------------
+------------ Config ----------
+------------------------------
+
+# Use 3 decimal places in output display
+pd.set_option("display.precision", 3)
+
+# Don't wrap repr(DataFrame) across additional lines
+pd.set_option("display.expand_frame_repr", False)
+
+# Set max rows displayed in output to 25
+pd.set_option("display.max_rows", 25)
+
