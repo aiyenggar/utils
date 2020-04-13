@@ -382,3 +382,5 @@ pd.set_option("display.expand_frame_repr", False)
 # Set max rows displayed in output to 25
 pd.set_option("display.max_rows", 25)
 
+# Check for occurances of string
+df2.organization.str.contains('Toyota').sum()
